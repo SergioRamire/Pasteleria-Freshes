@@ -24,7 +24,7 @@
 
             <!-- ENCABEZADO -->
             <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                <h3 class="mb-3">Pedidos pendientes
+                <h3 class="mb-3">Pedidos pendientes de entrega
                     <i class="fas fa-info-circle text-primary"
                     data-toggle="tooltip"
                     data-placement="right"
@@ -102,7 +102,7 @@
                             <th class="text-center">@sortablelink('order_date', 'Fecha pedido')</th>
                             <th class="text-center">Estado Pago</th>
                             <th>@sortablelink('total', 'Total')</th>
-                            <th class="text-center">Estado Orden</th>
+                            <th class="text-center">Estado Entrega</th>
                             <th class="text-center">Tipo Entrega</th>
                             <th class="text-center">Acción</th>
                         </tr>

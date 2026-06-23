@@ -53,7 +53,7 @@ class VentaController extends Controller
             ->join('products', 'products.id', '=', 'inventarios.product_id')
             ->join('categories as c', 'products.category_id', '=', 'c.id')
             ->join('marcas as m', 'products.marca_id', '=', 'm.id')
-            ->leftjoin('equivalencias','equivalencias.id','=','products.equivalencia_id')
+            // ->leftjoin('equivalencias','equivalencias.id','=','products.equivalencia_id')
             ->select(
                 'inventarios.id as inventario_id',
                 'inventarios.stock',
@@ -67,7 +67,7 @@ class VentaController extends Controller
                 'products.dealer_price as dealer_price',
                 'c.name as category_name',
                 'm.nombre as marca_nombre',
-                'equivalencias.abreviatura as equivalencia'
+                // 'equivalencias.abreviatura as equivalencia'
             )
 
             ->where('inventarios.branche_id', $user->branche_id)
@@ -153,7 +153,7 @@ class VentaController extends Controller
                 'options' => [
                 'inventario_id' => $validatedData['inventario_id'],
                 'dealer_price' => $validatedData['dealer_price'],
-                'equivalencia' => $request->input('equivalencia'), // AGREGAR ESTA LÍNEA
+                // 'equivalencia' => $request->input('equivalencia'), // AGREGAR ESTA LÍNEA
                 'size' => 'large',
                 ]
             ]);
@@ -331,7 +331,7 @@ class VentaController extends Controller
                 'products.selling_price',
                 'products.product_image',
                 'products.dealer_price',
-                'equivalencias.abreviatura as equivalencia' // AGREGAR ESTA LÍNEA
+                // 'equivalencias.abreviatura as equivalencia' // AGREGAR ESTA LÍNEA
             )
             ->first();
 
@@ -377,7 +377,7 @@ class VentaController extends Controller
                     'image' => $producto->product_image,
                     'inventario_id' => $producto->inventario_id,
                     'dealer_price'=> $producto->dealer_price,
-                    'equivalencia' => $producto->equivalencia // AGREGAR ESTA LÍNEA
+                    // 'equivalencia' => $producto->equivalencia // AGREGAR ESTA LÍNEA
                 ]
             ]);
         }

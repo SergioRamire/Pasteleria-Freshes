@@ -118,7 +118,7 @@
                                     --}}
                                     <th>Foto</th>
                                     <th>@sortablelink('product_name', 'nombre')</th>
-                                    <th>Unidad</th>
+                                    <!-- <th>Unidad</th> -->
                                     <th>Precio</th>
                                     {{--
                                     <th>@sortablelink('selling_price', 'precio venta')</th>
@@ -135,9 +135,9 @@
                                     <td>{{ $product->product_code }}</td>
                                     <td><img class="avatar-40 rounded" src="{{ $product->product_image ? asset('storage/products/'.$product->product_image) : asset('assets/images/product/default.webp') }}"></td>
                                     <td>{{ $product->product_name }}</td>
-                                    <td>
+                                    <!-- <td>
                                         {{ $product->equivalencia ? strtoupper($product->equivalencia) : 'Sin unidad' }}
-                                    </td>
+                                    </td> -->
                                     <td>${{ number_format($product->selling_price, 2) }}</td>
                                     <td>{{ $product->stock }}</td>
                                     <td>
@@ -182,7 +182,7 @@
                                 <tr>
                                     <th>Nombre</th>
                                     <th style="min-width:120px;">Cantidad</th>
-                                    <th>Unidad</th>
+                                    <!-- <th>Unidad</th> -->
                                     <th>Precio U.</th>
                                     <th>Subtotal</th>
                                     <th>Acción</th>
@@ -204,9 +204,9 @@
                                             </button>
                                         </form>
                                     </td>
-                                    <td>
+                                    <!-- <td>
                                         {{ $item->options->equivalencia ?? 'N/A' }}
-                                    </td>
+                                    </td> -->
                                     <td class="text-center">${{ number_format($item->price, 2) }}</td>
                                     <td class="text-center">${{ number_format($item->subtotal, 2) }}</td>
                                     <td class="text-center">

@@ -40,9 +40,13 @@ class BranchesController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
+         $rules = [
             'nombre' => 'required|string|max:50',
-            'direccion' => 'required|string|max:80',
+            'telefono' => 'nullable|string|max:10',
+            'direccion' => 'required|string|max:150',
+            'latitud' => 'nullable|string|max:150',
+            'longitud' => 'nullable|string|max:150',
+            'rul_maps' => 'nullable|string|max:150',
         ];
 
         $messages = [
@@ -51,7 +55,8 @@ class BranchesController extends Controller
             'nombre.max'        => 'El nombre de la sucursal no debe exceder los 50 caracteres.',
             'direccion.required'=> 'La dirección es obligatoria.',
             'direccion.string'  => 'La dirección debe ser una cadena de texto.',
-            'direccion.max'     => 'La dirección no debe exceder los 80 caracteres.',
+            'direccion.max'     => 'La dirección no debe exceder los 150 caracteres.',
+            'telefono.max'      => 'El teléfono no debe exceder los 10 caracteres.',
         ];
 
         $validatedData = $request->validate($rules, $messages);
@@ -88,7 +93,11 @@ class BranchesController extends Controller
     {
         $rules = [
             'nombre' => 'required|string|max:50',
-            'direccion' => 'required|string|max:80',
+            'telefono' => 'nullable|string|max:10',
+            'direccion' => 'required|string|max:150',
+            'latitud' => 'nullable|string|max:150',
+            'longitud' => 'nullable|string|max:150',
+            'rul_maps' => 'nullable|string|max:150',
         ];
 
         $validatedData = $request->validate($rules);

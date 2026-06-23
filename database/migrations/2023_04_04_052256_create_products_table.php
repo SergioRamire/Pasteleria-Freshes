@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('category_id');
             $table->string('product_code')->nullable();
             $table->string('codigo_barras')->nullable()->unique();
-            $table->string('clave_sat')->nullable();
+            // $table->string('clave_sat')->nullable();
             $table->string('product_garage')->nullable();
             $table->string('product_image')->nullable();
             $table->integer('product_store')->nullable();
@@ -29,7 +29,7 @@ return new class extends Migration
             $table->decimal('dealer_price')->nullable();
             $table->foreignId('marca_id')->nullable()->constrained('marcas')->onDelete('restrict');
             $table->foreignId('equivalencia_id')->nullable()->constrained('equivalencias')->onDelete('restrict');
-            $table->foreignId('satclave_id')->nullable()->constrained('satclaves')->onDelete('restrict');
+            // $table->foreignId('satclave_id')->nullable()->constrained('satclaves')->onDelete('restrict');
             $table->timestamps();
         });
     }

@@ -50,7 +50,7 @@ class ProductSeeder extends Seeder
                 'category_id' => Arr::random($categoryIds),
                 'product_code' => !empty($row['product_code']) ? $row['product_code'] : null,
                 'codigo_barras' => !empty($row['codigo_barras']) ? $row['codigo_barras'] : null,
-                'clave_sat' => $row['clave_sat'] ?? str_pad(rand(1, 999999999), rand(1, 9), '0', STR_PAD_LEFT),
+                // 'clave_sat' => $row['clave_sat'] ?? str_pad(rand(1, 999999999), rand(1, 9), '0', STR_PAD_LEFT),
                 'product_garage' => Arr::random(['A1', 'A2', 'B1', 'B2', 'C1']),
                 'product_image' => null,
                 'product_store' => rand(10, 100),

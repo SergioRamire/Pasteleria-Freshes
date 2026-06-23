@@ -50,7 +50,7 @@ class DatabaseSeeder extends Seeder
             CustomerSeeder::class,
             ProductSeeder::class,
             InventarioSeeder::class,
-            ClaveSatSeeder::class,
+            // ClaveSatSeeder::class,
         ]);
     }
 

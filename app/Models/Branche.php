@@ -13,6 +13,9 @@ class Branche extends Model
     protected $fillable = [
         'nombre',
         'direccion',
+        'longitud',
+        'latitud',
+        'rul_maps',
     ];
 
     public $sortable = [

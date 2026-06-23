@@ -34,6 +34,8 @@ return new class extends Migration
             $table->string('pais')->nullable();
             $table->string('referencia')->nullable();
             $table->integer('cp')->nullable();
+            $table->string('longitud')->nullable();
+            $table->string('latitud')->nullable();
             $table->string('rul_maps')->nullable();
             $table->timestamps();
         });

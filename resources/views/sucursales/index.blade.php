@@ -82,7 +82,7 @@
                         <tr class="ligth ligth-data">
                             <th>N°</th>
                             <th>@sortablelink('name', 'Nombre de sucursal')</th>
-                            <th>Direcciòn</th>
+                            <th>Dirección</th>
                             <th>Acción</th>
                         </tr>
                     </thead>

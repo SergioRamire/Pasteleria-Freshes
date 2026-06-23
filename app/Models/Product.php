@@ -26,7 +26,7 @@ class Product extends Model
         'dealer_price',
         'marca_id',
         'status_product',
-        'satclave_id',
+        // 'satclave_id',
         'equivalencia_id',
     ];
 
@@ -58,9 +58,9 @@ class Product extends Model
         return $this->belongsTo(Equivalencia::class, 'equivalencia_id');
     }
 
-     public function satclave(){
-        return $this->belongsTo(Satclave::class, 'satclave_id');
-    }
+    //  public function satclave(){
+    //     return $this->belongsTo(Satclave::class, 'satclave_id');
+    // }
 
     public function scopeFilter($query, array $filters)
     {

@@ -217,7 +217,7 @@
                                             <th class="text-center" scope="col">#</th>
                                             <th scope="col">Artículo</th>
                                             <th class="text-center" scope="col">Cantidad</th>
-                                            <th class="text-center" scope="col">Unidad</th>
+                                            <!-- <th class="text-center" scope="col">Unidad</th> -->
                                             <th class="text-center" scope="col">Precio U.</th>
                                             <th class="text-center" scope="col">Totales</th>
                                         </tr>
@@ -230,7 +230,7 @@
                                                 <h6 class="mb-0">{{ $item->name }}</h6>
                                             </td>
                                             <td class="text-center">{{ $item->qty }}</td>
-                                            <td class="text-center">{{ $item->options->equivalencia ?? 'N/A' }}</td>
+                                            <!-- <td class="text-center">{{ $item->options->equivalencia ?? 'N/A' }}</td> -->
                                             <td class="text-center">${{ number_format($item->price, 2) }}</td>
                                             <td class="text-center">${{ number_format($item->subtotal, 2) }}</td>
                                         </tr>

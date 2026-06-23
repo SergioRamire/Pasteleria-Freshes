@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('direccion');
+            $table->string('telefono')->nullable();
+            $table->string('longitud')->nullable();
+            $table->string('latitud')->nullable();
+            $table->string('rul_maps')->nullable();
             $table->timestamps();
         });
     }

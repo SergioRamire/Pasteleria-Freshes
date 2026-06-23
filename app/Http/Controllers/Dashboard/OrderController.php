@@ -16,7 +16,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
-
+use App\Models\Inventario;
 
 class OrderController extends Controller
 {
@@ -38,7 +38,8 @@ class OrderController extends Controller
         $hoy = now()->timezone('America/Mexico_City')->toDateString();
         $hasSortable = request()->has('sort');
 
-        $orders = Order::where('order_status', 'pendiente')
+        $orders = Order::where('payment_status', 'pagado')
+                ->where('order_status', 'pendiente')
                 ->where('branche_id',$empleado->branche_id)
                 ->when($search, function ($query) use ($search) {
                     $query->where(function ($q) use ($search) {
@@ -293,7 +294,7 @@ class OrderController extends Controller
     {
         return OrderDetails::query()
             ->join('products', 'products.id', '=', 'order_details.product_id')
-            ->leftJoin('satclaves', 'satclaves.id', '=', 'products.satclave_id')
+            // ->leftJoin('satclaves', 'satclaves.id', '=', 'products.satclave_id')
             ->leftJoin('equivalencias', 'equivalencias.id', '=', 'products.equivalencia_id')
             ->select(
                 'order_details.*',
@@ -301,7 +302,7 @@ class OrderController extends Controller
                 'products.product_image as product_image',
                 'products.selling_price as selling_price',
                 'products.codigo_barras as codigo_barras',
-                'satclaves.c_ClaveProdServ as clave',
+                // 'satclaves.c_ClaveProdServ as clave',
                 'equivalencias.nombre as equivalencia'
             )
             ->where('order_id', $order_id)
@@ -392,6 +393,7 @@ class OrderController extends Controller
         $orderDate = request('order_date'); // filtro por fecha (YYYY-MM-DD)
 
         $query = Order::where('due', '>', 0)
+                    ->where('order_status', 'pendiente')
                     ->where('branche_id',$empleado->branche_id);
 
         if ($search) {
@@ -686,5 +688,5 @@ class OrderController extends Controller
         return view('ventas.auto_print', compact('venta'));
     }
 
-
+    
 }

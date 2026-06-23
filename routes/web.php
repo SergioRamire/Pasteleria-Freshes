@@ -68,6 +68,8 @@ use App\Http\Controllers\Dashboard\ConversionController;
 
 use App\Http\Controllers\Dashboard\ConfiguracionNegocioController;
 
+use App\Http\Controllers\Dashboard\EditOrderController;
+
 /*
 |--------------------------------------------------------------------------
 | Rutas Web Principales
@@ -760,3 +762,11 @@ require __DIR__.'/auth.php';
 | - 'permission:xxx.accion': Requiere permiso específico para una acción
 |
 */
+Route::middleware(['permission:orders.menu'])->group(function () {
+    Route::get('/ventas/{id}/editar',           [EditOrderController::class, 'editarOrder'])->name('ventas.editar');
+    Route::get('/ventas/editar/index',          [EditOrderController::class, 'editarIndex'])->name('ventas.editar.index');
+    Route::post('/ventas/editar/add-cart',      [EditOrderController::class, 'addCartEdit'])->name('ventas.editar.addCart');
+    Route::post('/ventas/editar/update-cart/{rowId}', [EditOrderController::class, 'updateCartEditar'])->name('ventas.editar.updateCart');
+    Route::get('/ventas/editar/delete-cart/{rowId}',  [EditOrderController::class, 'deleteCartEditar'])->name('ventas.editar.deleteCart');
+    Route::post('/ventas/editar/guardar',       [EditOrderController::class, 'guardarEdicionVenta'])->name('ventas.editar.guardar');
+});

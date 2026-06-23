@@ -23,11 +23,15 @@
 
 
                     <div class=" row align-items-center">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                                 <label for="nombre"><i class="ri-store-line me-1"></i> Nombre de la sucursal</label>
                             <input type="text" class="form-control" value="{{  $sucursal->nombre }}" readonly>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
+                                <label for="telefono"><i class="ri-phone-line me-1"></i> Teléfono</label>
+                                <input type="text" class="form-control" value="{{  $sucursal->telefono }}" readonly>
+                        </div>
+                        <div class="form-group col-md-4">
                             <label><i class="ri-map-pin-line me-1"></i> Direccion</label>
                             <input type="text" class="form-control" value="{{  $sucursal->direccion }}" readonly>
                         </div>
