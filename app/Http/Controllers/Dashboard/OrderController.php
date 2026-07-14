@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Redirect;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Models\Inventario;
+use App\Models\Payment;
+use Illuminate\Support\Str;
+
 
 class OrderController extends Controller
 {
@@ -186,12 +189,17 @@ class OrderController extends Controller
         $due = $subTotal - $totalPaid;
         $status = $totalPaid >= $subTotal ? 'pagado' : 'pendiente';
 
-        $invoice_no = IdGenerator::generate([
-            'table' => 'orders',
-            'field' => 'invoice_no',
-            'length' => 10,
-            'prefix' => 'INV-'
-        ]);
+        // $invoice_no = IdGenerator::generate([
+        //     'table' => 'orders',
+        //     'field' => 'invoice_no',
+        //     'length' => 10,
+        //     'prefix' => 'INV-'
+        // ]);
+
+        // Generar código único
+        do {
+            $invoice_no = 'INV-' . strtoupper(Str::random(10));
+        } while (Order::where('invoice_no', $invoice_no)->exists());
 
         // Define método de pago para el campo (puedes ajustarlo según lógica)
         if ($request->pay_cash > 0 && $request->pay_card > 0) {
@@ -329,8 +337,12 @@ class OrderController extends Controller
     {
         $order = Order::find($order_id);
         $orderDetails = $this->obtenerDetallesOrden($order_id);
+        $abonos = Payment::where('order_id',$order->id)
+            ->latest()
+            ->get();
+        // dd($order, $orderDetails, $abonos);
 
-        return view('orders.detailsDue', compact('order', 'orderDetails'));
+        return view('orders.detailsDue', compact('order', 'orderDetails', 'abonos'));
     }
 
     public function orderDetailsCancel(Int $order_id)

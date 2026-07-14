@@ -70,6 +70,8 @@ use App\Http\Controllers\Dashboard\ConfiguracionNegocioController;
 
 use App\Http\Controllers\Dashboard\EditOrderController;
 
+use App\Http\Controllers\Dashboard\AbonosController;
+
 /*
 |--------------------------------------------------------------------------
 | Rutas Web Principales
@@ -727,6 +729,19 @@ Route::middleware(['permission:database.menu'])->group(function () {
     Route::get('/database/backup/download/{getFileName}', [DatabaseBackupController::class, 'download'])->name('backup.download');
     Route::get('/database/backup/delete/{getFileName}', [DatabaseBackupController::class, 'delete'])->name('backup.delete');
 });
+
+/*
+|
+| Rustas para registrar los abonos a una venta registrada.
+|
+*/
+Route::middleware(['permission:compras.menu'])->group(function () {
+    Route::resource('/abonos', AbonosController::class);
+    Route::get('/abonos/ver/{id}', [AbonosController::class, 'verindex'])->name('abonos.verindex');
+    Route::get('/abonos/ticket/{id}', [AbonosController::class, 'showTicket'])->name('abonos.ticket');
+
+});
+
 
 /*
 |--------------------------------------------------------------------------

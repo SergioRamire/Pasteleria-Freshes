@@ -142,13 +142,15 @@
             <div class="col-sm-6 text-sm-end">
                 <h6><strong>Detalles de pago:</strong></h6>
                 <p>
-                    <i class="fas fa-wallet text-primary me-1"></i> Método: {{ ucfirst($order->metodo_pago) }}<br>
                     <i class="fas fa-check-circle text-success me-1"></i> Estado:
                     <span class="{{ strtolower($order->payment_status) == 'pagado' ? 'text-success' : 'text-danger' }}">
                         {{ ucfirst($order->payment_status) }}
                     </span><br>
-                    <i class="fas fa-hand-holding-usd text-info me-1"></i> Total: ${{ number_format($order->total, 2) }}<br>
-                    <i class="fas fa-coins text-warning me-1"></i> Cambio: ${{ number_format(abs($order->due), 2) }}
+                    @if($order->payment_status != 'pendiente')
+                        <i class="fas fa-wallet text-primary me-1"></i> Método: {{ ucfirst($order->metodo_pago) }}<br>
+                        <i class="fas fa-hand-holding-usd text-info me-1"></i> Total: ${{ number_format($order->total, 2) }}<br>
+                        <i class="fas fa-coins text-warning me-1"></i> Cambio: ${{ number_format(abs($order->due), 2) }}                   
+                    @endif
                 </p>
             </div>
         </div>
@@ -160,7 +162,7 @@
                 <thead>
                     <tr>
                         <th>Cantidad</th>
-                        <th>Unidad</th>
+                        <!-- <th>Unidad</th> -->
                         <th>Código</th>
                         <th>Producto</th>
                         {{-- <th>Precio Unitario</th> --}}
@@ -171,7 +173,7 @@
                     @foreach ($orderDetails as $item)
                     <tr>
                         <td>{{ $item->quantity }}</td>
-                        <td>{{ $item->product->equivalencia->nombre ?? 'Sin unidad' }}</td>
+                        <!-- <td>{{ $item->product->equivalencia->nombre ?? 'Sin unidad' }}</td> -->
                         <td>{{ $item->product->product_code }}</td>
                         <td>{{ $item->product->product_name }}</td>
                         {{--
@@ -195,7 +197,7 @@
             <h5 class="mb-3">Ubicación en Google Maps</h5>
             <div class="ratio ratio-16x9 mb-5">
                 <iframe
-                    src="https://www.google.com/maps?q={{ urlencode($order->customer->rul_maps) }}&output=embed"
+                    src="{{$order->customer->rul_maps}}&z=16&output=embed"
                     style="border:0;"
                     allowfullscreen
                     loading="lazy"

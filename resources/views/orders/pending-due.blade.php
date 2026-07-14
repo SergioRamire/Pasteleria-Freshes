@@ -81,7 +81,7 @@
                     <table class="table table-hover align-middle mb-0">
                         <thead class="table-light">
                             <tr class="text-center">
-                                <th>N°.</th>
+                                <!-- <th>N°.</th> -->
                                 <th>N° Ticket</th>
                                 <th>@sortablelink('customer.name', 'Cliente')</th>
                                 <th>Fecha Pedido</th>
@@ -95,7 +95,7 @@
                         <tbody>
                             @forelse ($orders as $order)
                                 <tr>
-                                    <td>{{ (($orders->currentPage() - 1) * $orders->perPage()) + $loop->iteration }}</td>
+                                    <!-- <td>{{ (($orders->currentPage() - 1) * $orders->perPage()) + $loop->iteration }}</td> -->
                                     <td>{{ $order->invoice_no }}</td>
                                     <td>{{ ucwords(strtolower($order->customer->name)) }}</td>
                                     <td class="text-center">{{ \Carbon\Carbon::parse($order->order_date)->format('d-m-Y') }}</td>
@@ -119,27 +119,31 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <div class="d-flex justify-content-center gap-1 flex-wrap">
-                                            <a class="btn btn-info d-flex align-items-center gap-1"
-                                            data-toggle="tooltip" title="Ver detalles del pedido"
+                                        <div class="d-flex justify-content-center align-items-center">
+
+                                            <a class="btn btn-info mx-2"
+                                            data-toggle="tooltip"
+                                            title="Ver detalles del pedido"
                                             href="{{ route('order.DetailsDue', $order->id) }}">
-                                                <i class="ri-file-text-line"></i> Detalles
+                                                <i class="ri-file-text-line"></i>
                                             </a>
 
-                                            <a class="btn btn-success d-flex align-items-center gap-1"
-                                            data-toggle="tooltip" title="Imprimir" target="_blank"
+                                            <a class="btn btn-success mx-2"
+                                            data-toggle="tooltip"
+                                            title="Imprimir"
+                                            target="_blank"
                                             href="{{ route('order.invoiceDownload', $order->id) }}">
-                                                <i class="ri-printer-line"></i> Imprimir
+                                                <i class="ri-printer-line"></i>
                                             </a>
 
-                                            <button type="button"
-                                                    class="btn btn-primary-dark d-flex align-items-center gap-1"
-                                                    data-toggle="modal" data-target=".bd-example-modal-lg"
-                                                    data-placement="top" title="Pagar Ticket"
-                                                    id="{{ $order->id }}"
-                                                    onclick="payDue(this.id)">
-                                                <i class="ri-money-dollar-circle-line"></i> Pagar
+                                            <button type="button" class="btn btn-primary-dark mx-2" data-toggle="modal"
+                                                    data-target=".bd-example-modal-lg" title="Pagar Ticket" id="{{ $order->id }}" onclick="payDue(this.id)">
+                                                <i class="ri-money-dollar-circle-line"></i>
                                             </button>
+
+                                            <a class="btn btn-info mx-2" data-toggle="tooltip" title="Abonar"  href="{{ route('abonos.verindex', $order->id) }}">
+                                                <i class="ri-file-text-line"></i>Abonar
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>

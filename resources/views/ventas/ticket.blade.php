@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>TICKET DE VENTA ACUARIO</title>
+    <title>TICKET DE VENTA</title>
     <link rel="shortcut icon" href="{{ asset('assets/images/logo/logo-min.png') }}">
     <style>
         body {
@@ -24,12 +24,12 @@
         .tabla-producto td { padding: 1px 0; vertical-align: top; word-break: break-word; }
         .tabla-producto th:nth-child(1),
         .tabla-producto td:nth-child(1) { width: 18%; text-align: center; }
+        /* .tabla-producto th:nth-child(2),
+        .tabla-producto td:nth-child(2) { width: 18%; text-align: center; } */
         .tabla-producto th:nth-child(2),
-        .tabla-producto td:nth-child(2) { width: 18%; text-align: center; }
+        .tabla-producto td:nth-child(2) { width: 78%; text-align: left; }
         .tabla-producto th:nth-child(3),
-        .tabla-producto td:nth-child(3) { width: 60%; text-align: left; }
-        .tabla-producto th:nth-child(4),
-        .tabla-producto td:nth-child(4) { width: 30%; text-align: right; }
+        .tabla-producto td:nth-child(3) { width: 30%; text-align: right; }
 
         .tabla-producto tbody tr:not(:last-child) {
             border-bottom: 1px dashed #ccc;
@@ -39,25 +39,46 @@
         .info { margin-top: 5px; font-size: 10px; text-align: left; }
         .aviso { font-size: 10px; margin-top: 6px; line-height: 1.4; text-align: justify; }
         .aviso strong { display: block; margin-bottom: 4px; text-align: center; }
-        .separador { text-align: center; margin: 10px 0; border-bottom: 2px double #000; padding-bottom: 5px; font-size: 10px; }
+        .separador { text-align: center; margin: 1px 0; border-bottom: 2px double #000; padding-bottom: 5px; font-size: 10px; }
         @media print {
             body { margin: 0; }
+        }
+        .logo-container{
+            text-align: center;
+            margin-bottom: 8px; /* Espacio pequeño */
+            line-height: 0;
+        }
+
+        .ticket-logo{
+            max-height: 70px;      /* Altura máxima */
+            max-width: 100%;       /* Nunca se sale del ticket */
+            width: auto;
+            height: auto;
+            object-fit: contain;
         }
     </style>
 </head>
 
 <body onload="window.print(); setTimeout(() => window.location.href='{{ route('ventas.index') }}', 1000)">
     <div id="ticket" class="ticket">
-        <div class="center">
-            <img src="{{ asset('assets/images/logo/logo.png') }}" alt="Logo" style="max-width: 120px; height: auto; margin-bottom: 6px;">
+        <div class="logo-container">
+            @if(!empty($configNegocio?->logo))
+                <img src="{{ asset('storage/' . $configNegocio->logo) }}"
+                    class="ticket-logo"
+                    alt="Logo">
+            @else
+                <img src="{{ asset('assets/images/logo/logo.png') }}"
+                    class="ticket-logo"
+                    alt="Logo">
+            @endif
         </div>
 
         <div class="center">
-            <strong>FERRETERA ACUARIO</strong><br>
+            <strong> {{ $configNegocio?->nombre_negocio ?? 'AcuarioA.' }}</strong><br>
             R.F.C.: GORA410218TNA<br>
             Sucursal: {{ $sucursal->nombre }}<br>
             {{ $sucursal->direccion }}<br>
-            Tel: 951-562-0424
+            Tel:  {{ $configNegocio?->telefono ?? '951-562-0424.' }} 
         </div>
 
         <div class="line"></div>
@@ -82,7 +103,7 @@
             <thead>
                 <tr>
                     <th>CANT</th>
-                    <th>UD</th>
+                    <!-- <th>UD</th> -->
                     <th>DESCRIPCIÓN</th>
                     <th>IMPORTE</th>
                 </tr>
@@ -91,7 +112,7 @@
                 @foreach($productos as $item)
                 <tr>
                     <td>{{ $item->cantidad }}</td>
-                    <td>{{ $item->unidad }}</td>
+                    <!-- <td>{{ $item->unidad }}</td> -->
                     <td>{{ $item->producto }}</td>
                     <td>${{ number_format($item->total, 2) }}</td>
                 </tr>
